@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Angular 6</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="listBook.length > 0">
+      <tr *ngFor="let book of listBook; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{book.name}}</td>
+        <td>{{book.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
