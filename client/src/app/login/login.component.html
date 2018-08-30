@@ -1,3 +1,17 @@
-<p>
-  login works!
-</p>
+<div class="loginForm">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" name="loginForm" class="form-horizontal" novalidate>
+    <div>
+      <label for="username">Username</label>
+      <div class="input-group">
+        <input type="text" class="form-control" name="username" size="36" [(ngModel)]="loginModel.username" #username="ngModel" required>
+      </div>
+    </div>
+    <div>
+      <label for="username">Password</label>
+      <input type="password" class="form-control" size="36" name="password" [(ngModel)]="loginModel.password" #password="ngModel" required>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+    </div>
+  </form>
+</div>

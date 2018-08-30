@@ -8,6 +8,11 @@ import { BookService } from './book/book.service';
 import { HttpModule } from '@angular/http';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './login/login.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuardService } from './login/auth-guard.service';
+import { HttpInterceptor } from './login/http-interceptor';
+import { AuthInterceptorService } from './login/auth-interceptor.service';
+import { HTTP_INTERCEPTORS } from '../../node_modules/@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,9 +24,18 @@ import { LoginService } from './login/login.service';
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpModule
+    HttpModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ //import service
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+    HttpInterceptor,
+    AuthGuardService,
     BookService,
     LoginService
   ],
