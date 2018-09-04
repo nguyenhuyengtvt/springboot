@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { Router } from '../../../node_modules/@angular/router';
 import { LoginService } from './login.service';
-import { PlatformLocation } from '../../../node_modules/@angular/common';
-import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +8,8 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   public loginModel: any = {};
-  apiUrl = environment.apiUrl;
 
   constructor(
     private router: Router,
