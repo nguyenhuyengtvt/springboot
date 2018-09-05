@@ -10,7 +10,7 @@ import { BehaviorSubject } from '../../../node_modules/rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  
+
   private apiUrl = environment.apiUrl + '/api/login';
   public isAdmin = new BehaviorSubject<boolean>(false);
   public loggedIn = new BehaviorSubject<boolean>(false);

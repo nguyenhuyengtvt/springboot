@@ -51,5 +51,4 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
 		return null;
 
 	}
-
 }
