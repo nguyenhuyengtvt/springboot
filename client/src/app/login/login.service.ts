@@ -34,13 +34,12 @@ export class LoginService {
         let user = response.json();
         if (response.headers.has("Authorization")) {
           let token = response.headers.get("Authorization");
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          localStorage.setItem('token', token);
+          localStorage.setItem("currentUser", JSON.stringify(user));
+          localStorage.setItem("token", token);
           this.loggedIn.next(true);
           return true;
-        } else {
-          return false;
         }
+        return false;
       }));
   }
 

@@ -11,7 +11,7 @@ import { HttpInterceptor } from '../login/http-interceptor';
 })
 export class BookService {
 
-  private urlRead = environment.apiUrl + '/api/exchange-rate';// '/api/all-book';
+  private urlRead = environment.apiUrl + '/api/all-book';
 
   constructor(private http: HttpInterceptor) { }
 
