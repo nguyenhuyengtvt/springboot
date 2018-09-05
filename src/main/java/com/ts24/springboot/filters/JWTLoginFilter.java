@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ts24.springboot.dto.LoginDTO;
+import com.ts24.springboot.dto.LoginDto;
 import com.ts24.springboot.service.TokenAuthenticationService;
 import com.ts24.springboot.service.impl.TokenAuthenticationServiceImpl;
 
@@ -33,7 +33,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res)
 			throws AuthenticationException, IOException, ServletException {
-		LoginDTO account = new ObjectMapper().readValue(req.getInputStream(), LoginDTO.class);
+		LoginDto account = new ObjectMapper().readValue(req.getInputStream(), LoginDto.class);
 		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(account.getUsername(),
 				account.getPassword(), Collections.emptyList()));
 	}

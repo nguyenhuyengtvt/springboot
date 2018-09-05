@@ -1,14 +1,14 @@
 package com.ts24.springboot.dto;
 
-public class LoginDTO {
+public class LoginDto {
 
 	private String username;
 	private String password;
 
-	public LoginDTO() {
+	public LoginDto() {
 	}
 
-	public LoginDTO(String username, String password) {
+	public LoginDto(String username, String password) {
 		super();
 		this.username = username;
 		this.password = password;
