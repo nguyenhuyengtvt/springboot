@@ -5,6 +5,7 @@ import { Book } from '../models/book';
 import { TemplateRef } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-book',
@@ -14,9 +15,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 export class BookComponent implements OnInit {
 
   private deleteId: String;
-  private modalRef: BsModalRef;
+  private confirmModal: BsModalRef;
+  private editModal: BsModalRef;
   private listBook: Book[] = [];
   private srcDelete = '../../assets/images/book/delete.png';
+  private srcEdit = '../../assets/images/book/edit.png';
 
   constructor(
     private bookService: BookService,
@@ -25,19 +28,24 @@ export class BookComponent implements OnInit {
 
   ngOnInit() {
     this.getBook();
+
   }
 
   private getBook() {
     this.bookService.getBook().subscribe(data => this.listBook = data);
   }
 
-  private showModal(template: TemplateRef<any>, id: String) {
+  private showConfirmModal(template: TemplateRef<any>, id: String) {
     this.deleteId = id;
-    let options: any = {
-      class: 'modal-sm',
+    this.confirmModal = this.modalService.show(template, { class: 'modal-md' });
+  }
+
+  private showEditModal(template: TemplateRef<any>, id: String) {
+    let config: any = {
+      class: 'modal-lg',
       backdrop: 'static'
     };
-    this.modalRef = this.modalService.show(template, options);
+    this.confirmModal = this.modalService.show(template, config);
   }
 
   private yes(): void {
@@ -48,11 +56,25 @@ export class BookComponent implements OnInit {
         console.log(error);
       }
     );
-    this.modalRef.hide();
+    this.confirmModal.hide();
   }
 
-  private no(): void {
-    this.modalRef.hide();
+  private close(): void {
+    this.confirmModal.hide();
+  }
+
+  private update(form: NgForm, id: String) {
+    let book: Book = new Book();
+    book.id = id;
+    book.name = form.value.name;
+    book.price = form.value.price;
+    this.bookService.updateBook(book).subscribe(
+      sucess => {
+        window.location.reload();
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 
 }

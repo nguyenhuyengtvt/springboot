@@ -11,8 +11,9 @@ import { HttpInterceptor } from '../login/http-interceptor';
 })
 export class BookService {
 
-  private urlRead = environment.apiUrl + '/api/all-book';
-  private urlDelete = environment.apiUrl + '/api/delete-book';
+  private urlRead = environment.apiUrl + "/api/all-book";
+  private urlDelete = environment.apiUrl + "/api/delete-book";
+  private urlUpdate = environment.apiUrl + "/api/update-book";
 
   constructor(private http: HttpInterceptor) { }
 
@@ -38,6 +39,19 @@ export class BookService {
       headers: headers
     });
     return this.http.post(this.urlDelete, id, options).pipe(
+      map((response: any) => response.json())
+    );
+  }
+
+  public updateBook(book: Book): Observable<void> {
+    let headers = new Headers({
+      "Content-Type": "application/json; charset=utf-8",
+      "Authorization": localStorage.getItem("token")
+    });
+    let options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post(this.urlUpdate, book, options).pipe(
       map((response: any) => response.json())
     );
   }

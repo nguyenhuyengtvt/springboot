@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.ts24.springboot.dto.BookDto;
 import com.ts24.springboot.entity.Book;
 import com.ts24.springboot.service.BookService;
 
@@ -30,6 +31,12 @@ public class BookController {
 	@PostMapping("delete-book")
 	private ResponseEntity<Void> deleteBook(@RequestBody String id) {
 		bookService.deleteById(Long.valueOf(id.trim()));
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PostMapping("update-book")
+	private ResponseEntity<Void> updateBook(@RequestBody BookDto book) {
+		bookService.updateBook(book);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 }

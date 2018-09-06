@@ -7,6 +7,7 @@
         <th>Name</th>
         <th>Price</th>
         <th>Delete</th>
+        <th>Edit</th>
       </tr>
     </thead>
     <tbody *ngIf="listBook.length != 0; else other;">
@@ -15,25 +16,58 @@
         <td>{{book.name}}</td>
         <td>{{book.price}}</td>
         <td>
-          <img (click)="showModal(template, book.id)" [src]="srcDelete" class="pointer">
+          <img (click)="showConfirmModal(confirmTemplate, book.id)" [src]="srcDelete" class="pointer">
         </td>
+        <td>
+          <img (click)="showEditModal(editTemplate, book.id)" [src]="srcEdit" class="pointer">
+        </td>
+        <!--edit modal-->
+        <ng-template #editTemplate>
+          <div class="modal-header">
+            <h4 class="modal-title pull-left">Update book</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="update(editForm, book.id)" #editForm="ngForm">
+              <div class="form-group">
+                <h6>Name</h6>
+                <input class="form-control" [(ngModel)]="book.name" name="name" ngModel>
+              </div>
+              <div class="form-group">
+                <h6>Price</h6>
+                <input class="form-control" [(ngModel)]="book.price" name="price" ngModel>
+              </div>
+              <div class="form-group text-center">
+                <button class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </ng-template>
       </tr>
     </tbody>
     <ng-template #other>
       <tbody>
         <tr>
-          <td colspan="4" class="text_center">No record!</td>
+          <td colspan="5" class="text-center">No record!</td>
         </tr>
       </tbody>
     </ng-template>
   </table>
 </div>
+
 <!--confirm modal-->
-<ng-template #template>
+<ng-template #confirmTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Do you want to delete?</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <div class="modal-body text-center">
-    <p>Do you want to delete?</p>
     <button type="button" class="btn btn-default" (click)="yes()">Yes</button>
     &nbsp;
-    <button type="button" class="btn btn-primary" (click)="no()">No</button>
+    <button type="button" class="btn btn-primary" (click)="close()">No</button>
   </div>
 </ng-template>
