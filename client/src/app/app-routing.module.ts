@@ -4,6 +4,7 @@ import { BookComponent } from './book/book.component';
 import { Routes, RouterModule} from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './login/auth-guard.service';
+import { ModalModule } from '../../node_modules/ngx-bootstrap';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    ModalModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
   declarations: []

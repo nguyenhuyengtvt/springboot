@@ -6,14 +6,34 @@
         <th>No</th>
         <th>Name</th>
         <th>Price</th>
+        <th>Delete</th>
       </tr>
     </thead>
-    <tbody *ngIf="listBook.length > 0">
+    <tbody *ngIf="listBook.length != 0; else other;">
       <tr *ngFor="let book of listBook; let i = index">
         <td>{{i + 1}}</td>
         <td>{{book.name}}</td>
         <td>{{book.price}}</td>
+        <td>
+          <img (click)="showModal(template, book.id)" [src]="srcDelete" class="pointer">
+        </td>
       </tr>
     </tbody>
+    <ng-template #other>
+      <tbody>
+        <tr>
+          <td colspan="4" class="text_center">No record!</td>
+        </tr>
+      </tbody>
+    </ng-template>
   </table>
 </div>
+<!--confirm modal-->
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to delete?</p>
+    <button type="button" class="btn btn-default" (click)="yes()">Yes</button>
+    &nbsp;
+    <button type="button" class="btn btn-primary" (click)="no()">No</button>
+  </div>
+</ng-template>

@@ -13,6 +13,7 @@ import { AuthGuardService } from './login/auth-guard.service';
 import { HttpInterceptor } from './login/http-interceptor';
 import { AuthInterceptorService } from './login/auth-interceptor.service';
 import { HTTP_INTERCEPTORS } from '../../node_modules/@angular/common/http';
+import { BsModalService } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { HTTP_INTERCEPTORS } from '../../node_modules/@angular/common/http';
     HttpInterceptor,
     AuthGuardService,
     BookService,
-    LoginService
+    LoginService,
+    BsModalService
   ],
   bootstrap: [AppComponent]
 })

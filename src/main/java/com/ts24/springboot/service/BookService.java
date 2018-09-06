@@ -6,4 +6,6 @@ import com.ts24.springboot.entity.Book;
 public interface BookService {
 	
 	List<Book> findAll();
+	
+	void deleteById(Long id);
 }
