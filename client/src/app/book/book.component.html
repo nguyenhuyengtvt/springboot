@@ -1,5 +1,8 @@
-<div class="container">
+<div class="container text-center">
   <h2>Angular 6</h2>
+  <div class="form-group text-right">
+    <button class="btn btn-primary" (click)="showAddModal(addTemplate)">Add</button>
+  </div>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -33,14 +36,18 @@
             <form (ngSubmit)="update(editForm, book.id)" #editForm="ngForm">
               <div class="form-group">
                 <h6>Name</h6>
-                <input class="form-control" [(ngModel)]="book.name" name="name" ngModel>
+                <input class="form-control" [(ngModel)]="book.name" name="name" ngModel required>
               </div>
               <div class="form-group">
                 <h6>Price</h6>
-                <input class="form-control" [(ngModel)]="book.price" name="price" ngModel>
+                <input class="form-control" [(ngModel)]="book.price" name="price" ngModel required>
               </div>
               <div class="form-group text-center">
                 <button class="btn btn-primary">Update</button>
+              </div>
+              <div class="form-group text-center">
+                <div *ngIf="showNotNumber" class="alert-danger">{{notNumber}}</div>
+                <div *ngIf="showFieldNotEmpty" class="alert-danger">{{fieldNotEmpty}}</div>
               </div>
             </form>
           </div>
@@ -69,5 +76,34 @@
     <button type="button" class="btn btn-default" (click)="yes()">Yes</button>
     &nbsp;
     <button type="button" class="btn btn-primary" (click)="close()">No</button>
+  </div>
+</ng-template>
+
+<!--add modal-->
+<ng-template #addTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add a new book</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form (ngSubmit)="add(addForm)" #addForm="ngForm">
+      <div class="form-group">
+        <h6>Name</h6>
+        <input class="form-control" name="name" ngModel required>
+      </div>
+      <div class="form-group">
+        <h6>Price</h6>
+        <input class="form-control" name="price" ngModel required>
+      </div>
+      <div class="form-group text-center">
+        <button class="btn btn-primary">Add</button>
+      </div>
+      <div class="form-group text-center">
+        <div *ngIf="showNotNumber" class="alert-danger">{{notNumber}}</div>
+        <div *ngIf="showFieldNotEmpty" class="alert-danger">{{fieldNotEmpty}}</div>
+      </div>
+    </form>
   </div>
 </ng-template>

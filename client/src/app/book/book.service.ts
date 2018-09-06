@@ -13,7 +13,7 @@ export class BookService {
 
   private urlRead = environment.apiUrl + "/api/all-book";
   private urlDelete = environment.apiUrl + "/api/delete-book";
-  private urlUpdate = environment.apiUrl + "/api/update-book";
+  private urlSave = environment.apiUrl + "/api/save-book";
 
   constructor(private http: HttpInterceptor) { }
 
@@ -43,7 +43,7 @@ export class BookService {
     );
   }
 
-  public updateBook(book: Book): Observable<void> {
+  public saveBook(book: Book): Observable<void> {
     let headers = new Headers({
       "Content-Type": "application/json; charset=utf-8",
       "Authorization": localStorage.getItem("token")
@@ -51,7 +51,7 @@ export class BookService {
     let options = new RequestOptions({
       headers: headers
     });
-    return this.http.post(this.urlUpdate, book, options).pipe(
+    return this.http.post(this.urlSave, book, options).pipe(
       map((response: any) => response.json())
     );
   }

@@ -34,9 +34,9 @@ public class BookController {
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	@PostMapping("update-book")
+	@PostMapping("save-book")
 	private ResponseEntity<Void> updateBook(@RequestBody BookDto book) {
-		bookService.updateBook(book);
+		bookService.save(book);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 }

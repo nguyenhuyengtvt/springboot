@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.ts24.springboot.dto.BookDto;
 import com.ts24.springboot.entity.Book;
@@ -27,10 +28,12 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void updateBook(BookDto book) {
+	public void save(BookDto book) {
 		Book entity = new Book();
+		if(!StringUtils.isEmpty(book.getId())) {
+			entity.setId(Long.valueOf(book.getId().trim()));
+		}
 		entity.setName(book.getName());
-		entity.setId(Long.valueOf(book.getId().trim()));
 		entity.setPrice(Double.valueOf(book.getPrice()));
 		bookRepository.save(entity);
 	}
