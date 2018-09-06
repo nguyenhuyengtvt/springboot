@@ -11,14 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ts24.springboot.entity.User;
-import com.ts24.springboot.repository.TUserRepository;
+import com.ts24.springboot.repository.UserRepository;
 
 @Service
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private TUserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
